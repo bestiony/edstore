@@ -4,18 +4,20 @@ include_once "functions.php";*/
 // take an array of products 
 // $products = json_decode($_SESSION['products'], true);
 // devide it into arrays of 15 products each 
-    $pages= array();
+echo "<div class ='container'>";
+$pages = array();
 
-    $items_per_page = 15;
-    // what are the result of count(array)/15 and count(array) % 15 
-    $array_length = count($show);
-    for ($i = 0, $j = 0; $i < $array_length ; $i+= $items_per_page, $j++){
-        $start = $i;
-        $end = $array_length - $i > $items_per_page ? 
-                $i + $items_per_page : 
-                $array_length  ;
-        $pages[$j] = array_slice($show, $start, $end);
-    }
+$items_per_page = 15;
+// what are the result of count(array)/15 and count(array) % 15 
+$array_length = count($show);
+$page_index = 0;
+$start = 0;
+if (count($show)>0) {
+    while ($start < $array_length) {
+    $pages[$page_index] = array_slice($show, $start, $items_per_page);
+    $start += 15;
+    $page_index++;
+}
 // print each array in a separate page 
 // if(isset($_GET[]))
 if ($array_length > 1) {
@@ -27,17 +29,16 @@ if ($array_length > 1) {
 }
 
 
-if(isset($_GET['page'])) {
+if (isset($_GET['page'])) {
     $page = $_GET['page'];
     foreach ($pages[$page] as $product) {
         printProduct($product);
     }
-} else if (count($pages) < 2){
-    foreach ($pages[0] as $product) {
-        printProduct($product);
-    }
-} else {
-	foreach ($show as $product) {
-        printProduct($product);
-    }
 }
+
+} else {
+    echo "item not found";
+}
+
+
+echo "</div>";

@@ -2,7 +2,7 @@
 function printProduct($product)
 {
 
-
+    // change 1
     $in_favourites = $product['favorite'] > 0;
     if ($in_favourites) {
         $button = "<button type='submit' name ='favorite' value='Remove from Favorite'>
@@ -28,8 +28,16 @@ function printProduct($product)
 
 function refresh_page()
 {
-    echo '<script>window.location="' . $_SERVER["PHP_SELF"].  '"</script>';
+    echo '<script>window.location="' . $_SERVER["PHP_SELF"] . '"</script>';
     // $_SERVER["PHP_SELF"]
+}
+
+function reQuery (){
+    // get the query list
+    // go to the before last link
+    $queries = json_decode($_SESSION['query_list'],true) ;
+    $last = end($queries);
+    echo '<script>window.location="' . $last.'"</script>';
 }
 
 function search_items($products)
@@ -45,20 +53,19 @@ function search_items($products)
         if ($isSize && $isAbout && $isName) {
             if (!in_array($product, $search_result)) {
                 $search_result[$id] = $product;
-                // array_push($search_result, $product);
             }
         }
     }
-    $_SESSION['search_result'] = json_encode($search_result);
-    $_SESSION['show'] = $_SESSION['search_result'];
-    return $search_result;
+    
+    $_SESSION['show'] = json_encode($search_result);
+    $_SESSION['priority_list'] = "show";
 }
 
 function add_items($products)
 {
     $id = count($products);
-    $size = isset($_GET['addsize']) ? $_GET['addsize'] : "unkown";
-    $name = $_GET['addname'] ? $_GET['addname'] : "unkown" . (count($products) + 1);
+    $size = isset($_GET['addsize']) ? $_GET['addsize'] : "x";
+    $name = $_GET['addname'] ? $_GET['addname'] : "unkown" . ($id + 1);
     $about = $_GET['addabout'] ? $_GET['addabout'] : "unkown";
     array_push($products, array(
         "id" => $id,
@@ -69,8 +76,12 @@ function add_items($products)
     ));
 
     $_SESSION['products'] = json_encode($products);
+    // search items refreshes the value of show and thus shows you the new product 
+    // added
     search_items($products);
-    return $products;
+    refresh_page();
+
+    
 }
 
 function print_search_history($history_array)
@@ -88,4 +99,34 @@ function print_favorites($favorite_item)
 {
     echo "$favorite_item[name] <br>
         $favorite_item[about]<br>";
+}
+
+
+function devide_into_pages($list)
+{
+    $items_per_page = $_SESSION['items_per_page'];
+    $array_length = count($list);
+    $page_index = 0;
+    $start = 0;
+    $pages = array();
+    while ($start < $array_length) {
+        $pages[$page_index] = array_slice($list, $start, $items_per_page);
+        $start += 15;
+        $page_index++;
+    }
+    return $pages;
+}
+
+function make_pages_buttons($pages)
+{
+    if (!empty($pages)) {
+        $array_length = count($pages);
+        if ($array_length > 1) {
+            echo "<form style='flex: 0 0 100%;display: flex;justify-content:  center; gap : 20px;'>";
+            foreach ($pages as $key => $page) {
+                echo "<button type='submit' name='page' value='$key'>page $key</button>";
+            }
+            echo "</form>";
+        }
+    }
 }

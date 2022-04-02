@@ -1,6 +1,16 @@
 <?php session_start();
 include_once 'functions.php';
 include 'processes.php';
+$GLOBALS['items_per_page'] = $_SESSION['items_per_page'];
+$query_list = json_decode($_SESSION['query_list'],true);
+    if (empty($query_list)){
+        $query_list[0] = $_SERVER["REQUEST_URI"];
+    }else {
+        $query_list[count($query_list)] =  $_SERVER["REQUEST_URI"];
+    }
+    $_SESSION['query_list'] = json_encode($query_list);
+
+
 
 ?>
 <!DOCTYPE html>
@@ -34,9 +44,9 @@ include 'processes.php';
             <div class="favorites">
                 <?php
                 // print favorites
-                if (isset($favorites)){
+                if (isset($favorites)) {
 
-                
+
                     foreach ($favorites as $item) {
                         print_favorites($item);
                     }
@@ -105,43 +115,88 @@ include 'processes.php';
             //         if (isset($_SESSION['search_result'])) {
             //             foreach ($search_result as $key => $item) {
             //             }
-                    
+
             //         $_SESSION['search_result'] = json_encode($search_result);
             //         $_SESSION['show'] =  $_SESSION['search_result'];
             //     // update it's items with the new values 
             // }
             // }
-            // print sth on the page . put it here so everything is done first before deciding 
-            //what to put on the page
-            
+
+            // print sth on the page . 
+            // put it here so everything is done first before deciding 
+            // what to put on the page
+
             $show = json_decode($_SESSION["show"], true);
-            if ( isset($_SESSION['search_result'])) {
-                $search_result = json_decode($_SESSION['search_result'],true);
-                $show = json_decode($_SESSION['search_result'],true);
-            }
+
+            // if ( isset($_SESSION['search_result'])) {
+            //     $search_result = json_decode($_SESSION['search_result'],true);
+            //     $show = json_decode($_SESSION['search_result'],true);
+            // } else {
+            //     $show = array_slice($products, 0 , $items_per_page);
+            // }
+
+
+
+
+            // take an array of products 
+            // $products = json_decode($_SESSION['products'], true);
+            // devide it into arrays of 15 products each 
+
             echo "<div class ='container'>";
-            include_once "pages.php";
+            $pages = json_decode($_SESSION['pages'], true);
+
+            // what are the result of count(array)/15 and count(array) % 15 
+            $array_length = count($show);
+            $page_index = 0;
+            $start = 0;
+            $results_exist = !empty($show);
+            if ($results_exist) {
+                $pages = devide_into_pages($show);
+                $_SESSION['pages'] = json_encode($pages);
+                // print each array in a separate page 
+                // if(isset($_GET[]))
+                make_pages_buttons($pages);
+            } else {
+                $pages = $show;
+                echo "<h1>item not found</h1>";
+            }
+            if (isset($_GET['page'])) {
+                $page = $_GET['page'];
+                foreach ($pages[$page] as $product) {
+                    printProduct($product);
+                }
+            } else {
+                if ($results_exist) {
+                    foreach ($pages[0] as $product) {
+                        printProduct($product);
+                    }
+                }
+            }
+
+            echo "</div>";
+
 
             // foreach ($show as $product) {
             //     printProduct($product);
             // }
-            echo "</div>";
 
 
             echo "<pre>";
             print_r($_SESSION);
-            if (isset($_SESSION['search_result'])) {
-                echo "search result";
-                print_r($search_result);
-            }
-            
             echo "favorites";
             print_r($favorites);
-            // echo "show";
+            echo "<br>";
             // print_r($show);
             echo $_SERVER['QUERY_STRING'];
+            // print_r($pages);
+            // echo "<br> show" . empty($show);
+            // print_r($show);
+            foreach ($_SERVER as $key => $value) {
+                echo "$key      --------------------     $value <br>";
+            }
+            print_r($query_list);
+            echo"<br>". end($query_list);
 
-            
 
 
             // print search history 
