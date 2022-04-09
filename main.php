@@ -186,7 +186,7 @@ $query_list = json_decode($_SESSION['query_list'],true);
 
             echo "</div>";
 
-            echo "<h2 class='click'>Debugger</h2>";
+            echo "<h2 class='click'>Debugger</h2> <input for='debugger' class='showbox' type='checkbox'>";
             echo "<div class='debugger'>";
 
             // foreach ($show as $product) {

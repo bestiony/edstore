@@ -134,13 +134,14 @@ tr:nth-child(even) {
 }
 .click{
     color: red;
+    display: inline-block;
 }
 
 .click:hover{
     cursor: pointer;
 }
 
-.click:focus + .debugger{
+.click:active + .debugger{
     display: block;
 }
 
@@ -162,4 +163,8 @@ tr:nth-child(even) {
     width: 250px;
     margin: auto;
 
+}
+
+.showbox:checked +.debugger{
+    display: block;
 }
