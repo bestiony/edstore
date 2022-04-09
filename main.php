@@ -41,6 +41,7 @@ $query_list = json_decode($_SESSION['query_list'],true);
         <div class="sidebar">
             <p>hello</p>
             <div class="history">
+                <h2>Search History</h2>
                 <?php
                 // print search history
                 if ($search_history) {
@@ -52,6 +53,7 @@ $query_list = json_decode($_SESSION['query_list'],true);
                 ?>
             </div>
             <div class="favorites">
+                <h2>Favorites</h2>
                 <?php
                 // print favorites
                 if (isset($favorites)) {
@@ -115,7 +117,7 @@ $query_list = json_decode($_SESSION['query_list'],true);
                     </div>
                 </div>
             </div>
-
+                
             <!-- what to echo -->
             <?php
             error_reporting(E_ALL);
@@ -184,29 +186,40 @@ $query_list = json_decode($_SESSION['query_list'],true);
 
             echo "</div>";
 
+            echo "<h2 class='click'>Debugger</h2>";
+            echo "<div class='debugger'>";
 
             // foreach ($show as $product) {
             //     printProduct($product);
             // }
 
+            echo "<h3>Session Array</h3>";
 
             echo "<pre>";
             print_r($_SESSION);
-            echo "favorites";
+            echo "<h3>favorites Array</h3>";
+
             print_r($favorites);
             echo "<br>";
             // print_r($show);
+            echo "<h3>Current Query </h3>";
+
             echo $_SERVER['QUERY_STRING'];
             // print_r($pages);
             // echo "<br> show" . empty($show);
             // print_r($show);
+            echo "<h3>Server Array</h3>";
+
             foreach ($_SERVER as $key => $value) {
                 echo "$key      --------------------     $value <br>";
             }
+            echo "<h3>Query history Array</h3>";
+
             print_r($query_list);
+
             echo"<br>". end($query_list);
 
-
+            echo "</div>";
 
             // print search history 
             ?>

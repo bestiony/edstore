@@ -125,3 +125,41 @@ tr:nth-child(even) {
 .favon{
     max-width: 20px ;
 }
+
+
+/* debugger  */
+.debugger{
+    max-width: 1200px;
+    display: none;
+}
+.click{
+    color: red;
+}
+
+.click:hover{
+    cursor: pointer;
+}
+
+.click:focus + .debugger{
+    display: block;
+}
+
+
+/* generate */
+
+.generate{
+    width: 300px;
+    height: 60px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.generate:first-of-type{
+    margin-top: 20%;
+}
+.generate input{
+    font-size: 40px;
+    width: 250px;
+    margin: auto;
+
+}
