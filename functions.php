@@ -4,24 +4,46 @@ function printProduct($product)
 
     // change 1
     $in_favourites = $product['favorite'] > 0;
+
+    // :: TEMPORARY ::
+    
+    // if ($in_favourites) {
+    //     $button = "<button type='submit' name ='favorite' value='Remove from Favorite'>
+    //                 <img class='favon' src='./images/favOn.png' alt='remove from favorite'>
+    //             </button>";
+    // } else {
+    //     $button = "<button type='submit' name ='favorite' value='Add to Favourite'>
+    //             <img class='favon' src='./images/favOff.png' alt='add to favorite'>
+    //             </button>";
+    // }
+    // echo "<table>
+    //     <th>$product[name]</th>
+    //     <tr><td>$product[size]</td></tr>
+    //     <tr><td>$product[about]</td></tr>
+    //     <tr><td><form>
+    //     <input type='hidden' name='favorite_item_id' value='$product[id]'>
+    //     <input type='submit' name ='favorite' value='Add to Favourite'>
+    //     $button
+    //     </form></td></tr>
+    //     </table>
+    //     ";
+
     if ($in_favourites) {
-        $button = "<button type='submit' name ='favorite' value='Remove from Favorite'>
-                    <img class='favon' src='./images/favOn.png' alt='remove from favorite'>
-                </button>";
+        $button = "<a href='main.php?favorite_item_id=$product[id]&favorite=Remove+from+Favorite'>
+        <button ><img class='favon' src='./images/favOn.png' alt='add to favorite'>
+    </button>";
     } else {
-        $button = "<button type='submit' name ='favorite' value='Add to Favourite'>
-                <img class='favon' src='./images/favOff.png' alt='add to favorite'>
-                </button>";
+        $button = "<a href='main.php?favorite_item_id=$product[id]&favorite=Add+to+Favourite'>
+        <button ><img class='favon' src='./images/favOff.png' alt='remove from favorite'>
+    </button>";
     }
     echo "<table>
         <th>$product[name]</th>
         <tr><td>$product[size]</td></tr>
         <tr><td>$product[about]</td></tr>
-        <tr><td><form>
-        <input type='hidden' name='favorite_item_id' value='$product[id]'>
-        <input type='submit' name ='favorite' value='Add to Favourite'>
+        <tr><td>
         $button
-        </form></td></tr>
+        </td></tr>
         </table>
         ";
 }

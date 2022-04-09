@@ -1,0 +1,25 @@
+add a header to main.php
+    make it fixed 
+    inside it 
+        logo
+        cart
+        favorites
+        home button(refreshes the page)
+        search input and button
+
+design
+    basic color => like the logo + white
+    layout
+        1 header
+        2 filter(20%) | body(rest)
+        1 brand         1 pages 
+        1 size          1 products (flex 15 at a time)
+        1 about
+    design the cart 
+
+clean the data 
+    get 15 working images
+    lay them out on the page 
+
+add product page
+    displays details based on the query product id

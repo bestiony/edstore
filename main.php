@@ -2,6 +2,8 @@
 include_once 'functions.php';
 include 'processes.php';
 $GLOBALS['items_per_page'] = $_SESSION['items_per_page'];
+// this list is used to keep the user in the current page whenever they
+// add or remove sth from favorites 
 $query_list = json_decode($_SESSION['query_list'],true);
     if (empty($query_list)){
         $query_list[0] = $_SERVER["REQUEST_URI"];
@@ -9,9 +11,6 @@ $query_list = json_decode($_SESSION['query_list'],true);
         $query_list[count($query_list)] =  $_SERVER["REQUEST_URI"];
     }
     $_SESSION['query_list'] = json_encode($query_list);
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +24,18 @@ $query_list = json_decode($_SESSION['query_list'],true);
 </head>
 
 <body>
-
+    <div class="header">
+        <div class="logo"><img src="./images/newlogo.png" alt=""></div>
+        <div class="search">
+            <!-- search for specific products based on their properties  -->
+            <form>
+                    <input type='text' name='name' placeholder='name'>
+                    <button type="submit" name='search' value='search'><img class="search_icon" src="./images/search.png" alt=""></button>
+                </form>
+        </div>
+        <div class="cart"></div>
+        <div class="favorite"></div>
+    </div>
     <div class="everything">
 
         <div class="sidebar">
@@ -134,7 +144,6 @@ $query_list = json_decode($_SESSION['query_list'],true);
             // } else {
             //     $show = array_slice($products, 0 , $items_per_page);
             // }
-
 
 
 
