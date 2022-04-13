@@ -76,6 +76,23 @@ if (isset($_GET['searchwords'])) {
     $search_history[] = $_GET['searchwords'];
     $_SESSION['search_history'] = $search_history;
 }
+// sort by 
+
+if (isset($_GET['sortby'])){
+    $sortOption = $_GET['sortby'];
+
+    $sideSort = array();
+    foreach($show as $product){
+        $sideSort[$product['id']] = $product[$sortOption];
+    }
+    asort($sideSort);
+    $sortedCash = array();
+    foreach ($sideSort as $id => $optionValue){
+        $sortedCash[$id] = $show[$id];
+    }
+    $show = $sortedCash;
+}
+
 
 
 // make pages
@@ -99,13 +116,20 @@ include "./snipets/html_head.php";
             <h2>All Products</h2>
             <div class="drop-down">
                 <span>Sort by</span>
-                <select name="" id="">
-                    <option value="">Default</option>
+                <select name="sortby" id="sortby" onchange="location = options[this.selectedIndex].value;">
+                    <option value="./Products.php?sortby=id" selected>Default</option>
+                    <option value="./Products.php?sortby=category">category</option>
+                    <option value="./Products.php?sortby=name">name</option>
+                    <option value="./Products.php?sortby=price">price</option>
+                    <option value="./Products.php?sortby=brand">brand</option>
+
+                    <!-- <option value="">Default</option>
                     <option value="">Price ( high to low )</option>
                     <option value="">Price ( low to high )</option>
                     <option value="">Rating</option>
                     <option value="">Popularity</option>
-                    <option value="">Sales</option>
+                    <option value="">Sales</option> -->
+                    
                 </select>
             </div>
             <?php 
