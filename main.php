@@ -192,9 +192,13 @@ $query_list = json_decode($_SESSION['query_list'],true);
             // foreach ($show as $product) {
             //     printProduct($product);
             // }
+            echo gettype($_SERVER['QUERY_STRING']);
+            $fact = $_SERVER['QUERY_STRING'] ;
+            var_dump($fact); 
+            echo strlen($_SERVER['QUERY_STRING']);
+            echo "<br>".$_SERVER['QUERY_STRING'];
 
             echo "<h3>Session Array</h3>";
-
             echo "<pre>";
             print_r($_SESSION);
             echo "<h3>favorites Array</h3>";
