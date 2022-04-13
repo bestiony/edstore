@@ -49,7 +49,16 @@
                     </ul>
                 </nav>
                 <div class="cart">
-                    <a href="./cart.php"><img src="./images/cart.png"  /></a>
+                    <a href="./cart.php">
+                        <p>
+                            <?php  
+                                if (!empty($cart)){
+                                    echo count($cart);
+                                }
+                            ?>
+                        </p>
+                        <img src="./images/cart.png"  />
+                    </a>
                 </div>
                 <div class="menu-icon" onclick="toggleMenu()">
                     <img  src="./images/menu.png" alt="">
