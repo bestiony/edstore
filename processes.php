@@ -15,6 +15,7 @@ if (!isset($_SESSION['products'])) {
 
     // store data
     $keys = fgetcsv($data);
+    $_SESSION['keys'] = $keys;
     $details = array();
 
 
