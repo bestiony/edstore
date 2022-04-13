@@ -91,6 +91,7 @@ if (isset($_GET['sortby'])){
         $sortedCash[$id] = $show[$id];
     }
     $show = $sortedCash;
+    $_SESSION['show'] = $show;
 }
 
 
