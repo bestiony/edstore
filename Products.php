@@ -117,11 +117,11 @@ include "./snipets/html_head.php";
             <div class="drop-down">
                 <span>Sort by</span>
                 <select name="sortby" id="sortby" onchange="location = options[this.selectedIndex].value;">
-                    <option value="./Products.php?sortby=id" selected>Default</option>
-                    <option value="./Products.php?sortby=category">category</option>
-                    <option value="./Products.php?sortby=name">name</option>
-                    <option value="./Products.php?sortby=price">price</option>
-                    <option value="./Products.php?sortby=brand">brand</option>
+                    <option value="./Products.php?sortby=id&<?php echo http_build_query($_SESSION['filter']) ?>" selected>Default</option>
+                    <option value="./Products.php?sortby=category&<?php echo http_build_query($_SESSION['filter']) ?>">category</option>
+                    <option value="./Products.php?sortby=name&<?php echo http_build_query($_SESSION['filter']) ?>">name</option>
+                    <option value="./Products.php?sortby=price&<?php echo http_build_query($_SESSION['filter']) ?>">price</option>
+                    <option value="./Products.php?sortby=brand&<?php echo http_build_query($_SESSION['filter']) ?>">brand</option>
 
                     <!-- <option value="">Default</option>
                     <option value="">Price ( high to low )</option>

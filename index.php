@@ -38,7 +38,7 @@ include "./snipets/html_head.php";
                     Check out our amazing offers and level up your gaming experience
                     with latest hardwar technology has to to offer
                 </p>
-                <a href="" class="btn">Let's Play <i class="fa fa-long-arrow-right"></i>
+                <a href="./Products.php" class="btn">Let's Play <i class="fa fa-long-arrow-right"></i>
                 </a>
             </div>
             <div class="col-2">
