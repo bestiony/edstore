@@ -41,7 +41,7 @@
                 </div>
                 <nav>
                     <ul id="menu_items">
-                        <li><a style="color: #555; font-style:italic;" href="./index.php">Home</a></li>
+                        <li><a href="./index.php">Home</a></li>
                         <li><a href="./Products.php">Browse Products</a></li>
                         <li><a href="./favorites.php">My Favorites</a></li>
                         <li><a href="./contact.php">Contact</a></li>
