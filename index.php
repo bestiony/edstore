@@ -125,7 +125,7 @@ include "./snipets/html_head.php";
                     <small>get the latest gaming keyboard and we'll through in a kickass gaming mouse with it's
                         extreemly comfortable mat </small>
                     <br>
-                    <a href="" class="btn">Buy Now</a>
+                    <a href="ProductDetails.php?id=33" class="btn">Buy Now</a>
                 </div>
             </div>
         </div>
@@ -152,7 +152,7 @@ include "./snipets/html_head.php";
                     <a href=""><img src="./images/hp.png" alt=""></a>
                 </div>
                 <div class="col-6">
-                    <a href=""><img src="./images/intel.png" alt=""></a>
+                    <a href=""><img src="./images/ASUS.png" alt=""></a>
                 </div>
 
             </div>
