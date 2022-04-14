@@ -43,9 +43,9 @@ if (isset($_GET['category'])) {
 $_SESSION['filter'] = $filter;
 
 // use the filter
-if (!empty($_GET)) {
+if (isset($_GET['category'])|| isset($_GET['brand'])) {
     $cash = array();
-    foreach ($show as $product) {
+    foreach ($products as $product) {
         $matches = array();
         foreach ($filter as $f_key => $f_value) {
             $matches[] = strlen($filter[$f_key]) > 0 ? $filter[$f_key] == $product[$f_key] : true;
@@ -76,7 +76,7 @@ if (isset($_GET['searchwords'])) {
     $search_history[] = $_GET['searchwords'];
     $_SESSION['search_history'] = $search_history;
 }
-// sort by 
+// sort by Normal
 
 if (isset($_GET['sortby'])){
     $sortOption = $_GET['sortby'];
@@ -93,6 +93,26 @@ if (isset($_GET['sortby'])){
     $show = $sortedCash;
     $_SESSION['show'] = $show;
 }
+
+
+// sort by Reverse
+
+if (isset($_GET['sortbyreverse'])){
+    $sortOption = $_GET['sortbyreverse'];
+
+    $sideSort = array();
+    foreach($show as $product){
+        $sideSort[$product['id']] = $product[$sortOption];
+    }
+    arsort($sideSort);
+    $sortedCash = array();
+    foreach ($sideSort as $id => $optionValue){
+        $sortedCash[$id] = $show[$id];
+    }
+    $show = $sortedCash;
+    $_SESSION['show'] = $show;
+}
+
 
 
 
@@ -120,16 +140,10 @@ include "./snipets/html_head.php";
                 <select name="sortby" id="sortby" onchange="location = options[this.selectedIndex].value;">
                     <option value="./Products.php?sortby=id&<?php echo http_build_query($_SESSION['filter']) ?>" selected>Default</option>
                     <option value="./Products.php?sortby=category&<?php echo http_build_query($_SESSION['filter']) ?>">category</option>
-                    <option value="./Products.php?sortby=name&<?php echo http_build_query($_SESSION['filter']) ?>">name</option>
-                    <option value="./Products.php?sortby=price&<?php echo http_build_query($_SESSION['filter']) ?>">price</option>
+                    <option value="./Products.php?sortby=title&<?php echo http_build_query($_SESSION['filter']) ?>">name</option>
+                    <option value="./Products.php?sortby=price&<?php echo http_build_query($_SESSION['filter']) ?>">price(low to high)</option>
+                    <option value="./Products.php?sortbyreverse=price&<?php echo http_build_query($_SESSION['filter']) ?>">price(high to low)</option>
                     <option value="./Products.php?sortby=brand&<?php echo http_build_query($_SESSION['filter']) ?>">brand</option>
-
-                    <!-- <option value="">Default</option>
-                    <option value="">Price ( high to low )</option>
-                    <option value="">Price ( low to high )</option>
-                    <option value="">Rating</option>
-                    <option value="">Popularity</option>
-                    <option value="">Sales</option> -->
                     
                 </select>
             </div>
@@ -138,26 +152,19 @@ include "./snipets/html_head.php";
                     make_pages_buttons($pages);
                 }
             ?>
-            <!-- <div class="page-btns">
-                <span>&#8592;</span>
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>&#8594;</span>
-            </div> -->
+            
         </div>
         <div class="row">
             <div id="filterBtn" onclick="showFilter()" class="showfilter">
                 <span class="filter">Filter</span>
             </div>
             <div id="filterBar" class="tall-row" onblur="hideFilter()">
-                <h3>CPU Brands</h3>
+                <!-- <h3>CPU Brands</h3>
                 <div class="row">
                     <a href=""><i class="fa fa-square-o"></i> intel</a>
                     <a href=""><i class="fa fa-square-o"></i> AMD</a>
                 </div>
-                <hr>
+                <hr> -->
                 <h3>Categories</h3>
                 <div class="row">
                     <?php
@@ -195,11 +202,15 @@ include "./snipets/html_head.php";
                 $continue = true;
                 if(empty($show)){
                     echo "
-                    <h1>The item you're looking for was not found</h1>
-                    <a href='./contact.php'>Contact us to add it to the list </a>
+                    <dic class='error_message'>
+                    <h1>The item you're looking for was not found</h1><br>
+                    <a href='./contact.php'><span style='color:#D21F3C;'>Contact us</span> to add it to the list </a>
+                    <br>
+                    <img src='./images/puzzled.gif'>
+                    </div>
                     ";
                     $continue = false;
-                    refresh_page();
+                    // refresh_page();
                 }
                 if (isset($_GET['page']) && $continue) {
                     $page = $_GET['page'];
@@ -215,12 +226,6 @@ include "./snipets/html_head.php";
 
                     }
                 }    
-                
-
-                // foreach ($show as $product) {
-                //     printProduct($product);
-                // }
-
                 ?>
 
 
@@ -230,17 +235,8 @@ include "./snipets/html_head.php";
         <?php 
             if($continue){
                 make_pages_buttons($pages);
-
             }
         ?>
-        <!-- <div class="page-btns">
-            <span>&#8592;</span>
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>&#8594;</span>
-        </div> -->
     </div>
 
 

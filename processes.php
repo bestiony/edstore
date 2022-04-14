@@ -39,16 +39,13 @@ if (!isset($_SESSION['products'])) {
             $detail_index++;
         }
     }
-
+    
 
     // ****----SESSION VARRIABLES -----**
 
     // fill special arrays to keep track of different aspcets freely
     foreach ($products as $id => $product) {
-        // ------ make favorites
-        // set all products to be not in favorites 
-        $products[$id]['favorite'] = 0;
-
+        
         //------- make categories--------
         // get all categories names
         if (empty($categories)) {
@@ -64,7 +61,8 @@ if (!isset($_SESSION['products'])) {
         } else if (!in_array($product['brand'], $brands)) {
             $brands[] = $product['brand'];
         }
-
+        asort($categories);
+        asort($brands);
         // -------- make prices 
         $prices[$id] = $product['price'];
         
