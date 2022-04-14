@@ -125,7 +125,7 @@ include "./snipets/html_head.php";
                     <small>get the latest gaming keyboard and we'll through in a kickass gaming mouse with it's
                         extreemly comfortable mat </small>
                     <br>
-                    <a href="ProductDetails.php?id=33" class="btn">Buy Now</a>
+                    <a href="ProductDetails.php?id=17" class="btn">Buy Now</a>
                 </div>
             </div>
         </div>
