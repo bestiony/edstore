@@ -4,7 +4,7 @@ include_once "../snipets/varriables.php";
 if (isset($_GET['item'])){
     $to_be_deleted = $_GET['item'];
 } else {
-    include "../snipets/404.php";
+    include "./404.php";
     exit;
 }
 

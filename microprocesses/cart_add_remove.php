@@ -2,7 +2,7 @@
 include_once "../snipets/varriables.php";
 include_once "../snipets/functions.php";
 if (!(isset($_GET['cart']) && isset($_GET['id']))){
-    include "../snipets/404.php";
+    include "./404.php";
     exit;
 }
 
