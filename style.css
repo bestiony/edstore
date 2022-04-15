@@ -897,7 +897,7 @@ table .table-left-col{
     flex-basis: 40%;
 }
 
-.add_product_form input:nth-child(7){
+.add_product_form input:nth-child(9){
     height: 90px;
 }
 

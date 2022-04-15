@@ -49,21 +49,21 @@ include "./snipets/html_head.php";
                         </select>
                     </div>
                     <input type="hidden" name="top" value="NEW">
-                    <input type="text" placeholder="Model name" name="ModelName">
-                    <input type="text" placeholder="Title" name="title">
-                    <input type="text" placeholder="Brand" name="brand">
-                    <input  min="0" type="number" id="" placeholder="Price $" name="price">
-                    <input type="text" placeholder="color" name="color">
-                    <textarea id="" cols="30" rows="10" placeholder="Description" name="description"></textarea>
+                    <input type="text" placeholder="Model name" name="ModelName" required>
+                    <input type="text" placeholder="Title" name="title" required>
+                    <input type="text" placeholder="Brand" name="brand" required>
+                    <input  min="0" type="number" id="" placeholder="Price $" name="price" required>
+                    <input type="text" placeholder="color" name="color" required>
+                    <textarea id="" cols="30" rows="10" placeholder="Description" name="description" required></textarea>
                     <div class="images_urls">
                         <input onblur="showphoto(url,show),showphoto(url,image1)" id="url" type="url"
-                            name="photos[]" placeholder="image 1 url" title="please use a valid img url">
+                            name="photos[]" placeholder="image 1 url" title="please use a valid img url" required>
                         <input onblur="showphoto(url2,image2)" id="url2" type="url" name="photos[]"
-                            placeholder="image 2 url" title="please use a valid img url">
+                            placeholder="image 2 url" title="please use a valid img url" required>
                         <input onblur="showphoto(url3,image3)" id="url3" type="url" name="photos[]"
-                            placeholder="image 3 url" title="please use a valid img url">
+                            placeholder="image 3 url" title="please use a valid img url" required>
                         <input onblur="showphoto(url4,image4)" id="url4" type="url" name="photos[]"
-                            placeholder="image 4 url" title="please use a valid img url">
+                            placeholder="image 4 url" title="please use a valid img url" required>
                     </div>
                     <input type="hidden" name="favorite" value="0">
                     <button type="submit" class="btn">Publish</button>
